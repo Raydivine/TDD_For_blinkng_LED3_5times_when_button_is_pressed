@@ -2,8 +2,8 @@
 
 
 int getCurrentTime(){
-	static uint32_t counter = 0;
-	static uint32_t currentTime = 0;
+	static int counter = 0;
+	static int currentTime = 0;
 
 	if(counter++ >= 100){
 		counter = 0;
@@ -11,13 +11,6 @@ int getCurrentTime(){
 	}
 
 	return currentTime;
-}
-
-void delay(uint32_t delayCycle){
-	static uint32_t previousTime = 0;
-
-	while( (getCurrentTime() - previousTime) < delayCycle);
-		previousTime = getCurrentTime();
 }
 
 int waitWithoutDelay ( int previousTime, int delayMilliSecond){

@@ -3,15 +3,8 @@
 
 typedef enum{
 	INITIAL,
-	LED1_OFF,
-	LED2_OFF,
 	LED3_OFF,
-	LED4_OFF,
-	LED1_ON,
-	LED2_ON,
 	LED3_ON,
-	LED4_ON,
-	Final
 }State;
 
 typedef struct{

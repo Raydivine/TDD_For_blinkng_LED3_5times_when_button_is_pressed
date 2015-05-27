@@ -3,36 +3,39 @@
 #include "timingControl.h"
 #include "button.h"
 #include "defination.h"
+#include <stdio.h>
+
+
 
 void blinkLED3FiveTimesWhenButtonPressed(State *state, int time){
 	static int previousTime = 0 ;
 	static int counter = 0 ;
 
-	switch (*state){
+    switch (*state){
 			case  INITIAL:	turnOffLED3();
       
-                      if( ButtonIsPressed() && counter < 5){
-                        *state = LED3_OFF;
-                        break;
-                       }
+                      if( ButtonIsPressed() && counter < 5)
+                        *state = LED3_OFF;              
+                      break;
 
-			case LED3_OFF:	if( ButtonIsNotPressed())
-                        break;
+			case LED3_OFF:	if( ButtonIsNotPressed()){
+                        printf("off and button no press\n");
+                        break;                  
+                      }
                       
                       if( counterIsEqualFive(counter)){
                         *state = INITIAL;
                         break;
                       }
       
-                      if( waitWithoutDelay( previousTime,time) ){
-                        previousTime = getCurrentTime();
-                        turnOnLED3();
-                        *state = LED3_ON;
-                      }
+                     
+                      turnOnLED3();
+                      *state = LED3_ON;                     
                       break;
                       
 			case  LED3_ON:  if( ButtonIsNotPressed()){
                         *state = LED3_OFF;
+                        printf("on and button no press\n");
                         break;
                       }
 
@@ -40,17 +43,15 @@ void blinkLED3FiveTimesWhenButtonPressed(State *state, int time){
 			                	*state = INITIAL;
 			                	break;
 			                }
-                      
-                      if( waitWithoutDelay( previousTime,time) ){
-                        previousTime = getCurrentTime();
-                        turnOffLED3();
-                        *state = LED3_OFF;
-                        counter++;
-                      }
+                                          
+                      turnOffLED3();
+                      *state = LED3_OFF;
+                      counter++;
                       break;
 
 			default: 		break;
 		}
+  
 }
 
 int ButtonIsNotPressed(){
