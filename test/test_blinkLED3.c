@@ -37,30 +37,107 @@ void test_blinkLED3FiveTimesWhenButtonPressed_given_INITIAL_and_PressedButton_sh
   resetCounter();
 }
 
-void test_blinkLED3FiveTimesWhenButtonPressed_given_LED3_OFF_and_NoPressedButton_should_remain_LED3_OFF(void){
-	State state = LED3_OFF;
+void test_blinkLED3FiveTimesWhenButtonPressed_given_INITIAL_2times_should_goto_LED3_On(void){
+	State state = INITIAL;
   int delay = 200;
   
-  buttonPressed_IgnoreAndReturn(0);
+  buttonPressed_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOnLED3_IgnoreAndReturn(1);
 
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay);
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay);
+  TEST_ASSERT_EQUAL(LED3_ON,state);
+  
+  resetCounter();
+}
+
+void test_blinkLED3FiveTimesWhenButtonPressed_given_INITIAL_3times_should_goto_LED3_Off(void){
+	State state = INITIAL;
+  int delay = 200;
+  
+  buttonPressed_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOnLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay);
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay);
   blinkLED3FiveTimesWhenButtonPressed(&state, delay);
   TEST_ASSERT_EQUAL(LED3_OFF,state);
   
   resetCounter();
 }
 
-void test_blinkLED3FiveTimesWhenButtonPressed_given_LED3_OFF_and_PressedButton_should_remain_LED3_ON(void){
-	State state = LED3_OFF;
+void test_blinkLED3FiveTimesWhenButtonPressed_given_INITIAL_10_times_should_goto_LED3on_and_this_is_number_fifthTimes_of_LED3On_state(void){
+	State state = INITIAL;
   int delay = 200;
   
   buttonPressed_IgnoreAndReturn(1);
   turnOnLED3_IgnoreAndReturn(1);
-
-  blinkLED3FiveTimesWhenButtonPressed(&state, delay);
-  TEST_ASSERT_EQUAL(LED3_ON,state);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOnLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOnLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOnLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
   
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   1
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   2
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   3
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   4
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   5
+  TEST_ASSERT_EQUAL(LED3_ON,state);   // this is number fifth times of On state
   resetCounter();
 }
+
+void test_blinkLED3FiveTimesWhenButtonPressed_given_INITIAL_12_times_should_goto_INITIAL_state_because_it_already_blink_5_times(void){
+	State state = INITIAL;
+  int delay = 200;
+  
+  buttonPressed_IgnoreAndReturn(1);
+  turnOnLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOnLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOnLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOnLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+
+  
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   1
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   2
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   3
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   4
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   5
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   6
+  TEST_ASSERT_EQUAL(INITIAL,state);   //  the state back to initial because already blink 5 times
+  resetCounter();
+}
+
 
 
 

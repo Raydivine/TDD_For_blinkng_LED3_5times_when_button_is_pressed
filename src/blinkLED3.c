@@ -5,6 +5,7 @@
 #include "defination.h"
 #include <stdio.h>
 
+
 static int counter = 0 ;
 
 void blinkLED3FiveTimesWhenButtonPressed(State *state, int time){
@@ -14,8 +15,15 @@ void blinkLED3FiveTimesWhenButtonPressed(State *state, int time){
     switch (*state){
 			case  INITIAL:	turnOffLED3();
       
-                      if( ButtonIsPressed() && counter < 5)
-                        *state = LED3_OFF;              
+                      if(counter>5){
+                        *state = INITIAL;
+                        break;
+                      }
+                      
+                      if( ButtonIsPressed())
+                        *state = LED3_OFF; 
+                      else *state = INITIAL;
+                      
                       break;
 
 			case LED3_OFF:	if( ButtonIsNotPressed()){
@@ -23,12 +31,11 @@ void blinkLED3FiveTimesWhenButtonPressed(State *state, int time){
                         break;                  
                       }
                       
-                      if( counterIsEqualFive(counter)){
+                      if(counter>5){
                         *state = INITIAL;
                         break;
                       }
       
-                     
                       turnOnLED3();
                       *state = LED3_ON;                     
                       break;
@@ -39,11 +46,10 @@ void blinkLED3FiveTimesWhenButtonPressed(State *state, int time){
                         break;
                       }
 
-                      if( counterIsEqualFive(counter)){
-                        printf("counter reached 5\n");
-			                	*state = INITIAL;
-			                	break;
-			                }
+                      if(counter>5){
+                        *state = INITIAL;
+                        break;
+                      }
                                           
                       turnOffLED3();
                       *state = LED3_OFF;
@@ -73,13 +79,6 @@ int ButtonIsPressed(){
 	if(readButton == 1 )
 		return 1;
 	return 0;
-}
-
-int counterIsEqualFive( int counter){
-
-	 if(counter>=5)
-	 	return 1;
-	 return 0;
 }
 
 void resetCounter(){
