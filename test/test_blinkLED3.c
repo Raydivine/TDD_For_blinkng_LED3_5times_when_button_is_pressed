@@ -83,9 +83,7 @@ void test_blinkLED3FiveTimesWhenButtonPressed_given_INITIAL_10_times_should_goto
   turnOffLED3_IgnoreAndReturn(1);
   turnOnLED3_IgnoreAndReturn(1);
   turnOffLED3_IgnoreAndReturn(1);
-  turnOffLED3_IgnoreAndReturn(1);
-  turnOffLED3_IgnoreAndReturn(1);
-  turnOffLED3_IgnoreAndReturn(1);
+  turnOnLED3_IgnoreAndReturn(1);
   
   blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
   blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   1
@@ -115,11 +113,9 @@ void test_blinkLED3FiveTimesWhenButtonPressed_given_INITIAL_12_times_should_goto
   turnOffLED3_IgnoreAndReturn(1);
   turnOnLED3_IgnoreAndReturn(1);
   turnOffLED3_IgnoreAndReturn(1);
+  turnOnLED3_IgnoreAndReturn(1);
   turnOffLED3_IgnoreAndReturn(1);
-  turnOffLED3_IgnoreAndReturn(1);
-  turnOffLED3_IgnoreAndReturn(1);
-  turnOffLED3_IgnoreAndReturn(1);
-  turnOffLED3_IgnoreAndReturn(1);
+  turnOnLED3_IgnoreAndReturn(1);
 
   
   blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off

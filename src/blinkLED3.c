@@ -31,13 +31,14 @@ void blinkLED3FiveTimesWhenButtonPressed(State *state, int time){
                         break;                  
                       }
                       
-                      if(counter>5){
+                      if(counter>=5){     //During off state,  counter equal of 5 times means LED3 blinked 5 times
                         *state = INITIAL;
                         break;
                       }
       
                       turnOnLED3();
-                      *state = LED3_ON;                     
+                      *state = LED3_ON; 
+                      counter++;                    
                       break;
                       
 			case  LED3_ON:  if( ButtonIsNotPressed()){
@@ -46,14 +47,13 @@ void blinkLED3FiveTimesWhenButtonPressed(State *state, int time){
                         break;
                       }
 
-                      if(counter>5){
+                      if(counter>5){   //During on state,  counter more than 5 means blinked 5 times
                         *state = INITIAL;
                         break;
                       }
                                           
                       turnOffLED3();
-                      *state = LED3_OFF;
-                      counter++;
+                      *state = LED3_OFF;                  
                       break;
 
 			default: 		break;
