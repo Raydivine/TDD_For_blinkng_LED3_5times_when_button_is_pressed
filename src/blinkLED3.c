@@ -20,17 +20,12 @@ void blinkLED3FiveTimesWhenButtonPressed(State *state, int time){
                         break;
                       }
                       
-                      if( ButtonIsPressed())
-                        *state = LED3_OFF; 
-                      else *state = INITIAL;
-                      
+                       *state = LED3_OFF; 
                       break;
 
-			case LED3_OFF:	if( ButtonIsNotPressed()){
-                        printf("off and button no press\n");
+			case LED3_OFF:	if( ButtonIsNotPressed())
                         break;                  
-                      }
-                      
+                                     
                       if(counter>=5){     //During off state,  counter equal of 5 times means LED3 blinked 5 times
                         *state = INITIAL;
                         break;
@@ -43,7 +38,6 @@ void blinkLED3FiveTimesWhenButtonPressed(State *state, int time){
                       
 			case  LED3_ON:  if( ButtonIsNotPressed()){
                         *state = LED3_OFF;
-                        printf("on and button no press\n");
                         break;
                       }
 

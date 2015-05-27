@@ -11,7 +11,7 @@ void tearDown(void)
 {
 }
 
-void test_blinkLED3FiveTimesWhenButtonPressed_given_INITIAL_and_NoPressedButton_should_remain_initial(void){
+void test_blinkLED3FiveTimesWhenButtonPressed_given_INITIAL_and_NoPressedButton_should_goto_LED3_OFF(void){
 	State state = INITIAL;
   int delay = 200;
   
@@ -19,7 +19,7 @@ void test_blinkLED3FiveTimesWhenButtonPressed_given_INITIAL_and_NoPressedButton_
   turnOffLED3_IgnoreAndReturn(1);
 
   blinkLED3FiveTimesWhenButtonPressed(&state, delay);
-  TEST_ASSERT_EQUAL(INITIAL,state);
+  TEST_ASSERT_EQUAL(LED3_OFF,state);
   
   resetCounter();
 }
@@ -134,7 +134,39 @@ void test_blinkLED3FiveTimesWhenButtonPressed_given_INITIAL_12_times_should_goto
   resetCounter();
 }
 
-
-
+void test_blinkLED3FiveTimesWhenButtonPressed_given_INITIAL_10_times_but_unpressedButton_at_number6times_should_always_remain_off_state(void){
+	State state = INITIAL;
+  int delay = 200;
+  
+  buttonPressed_IgnoreAndReturn(0);
+  turnOnLED3_IgnoreAndReturn(1);  
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOnLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOnLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOnLED3_IgnoreAndReturn(1);
+  turnOffLED3_IgnoreAndReturn(1);
+  turnOnLED3_IgnoreAndReturn(1);
+  
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   1
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   2
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   3
+  buttonPressed_IgnoreAndReturn(0);
+  
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
+  TEST_ASSERT_EQUAL(LED3_OFF,state);
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   4
+  TEST_ASSERT_EQUAL(LED3_OFF,state);
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //off
+  TEST_ASSERT_EQUAL(LED3_OFF,state);
+  blinkLED3FiveTimesWhenButtonPressed(&state, delay); //on   5
+  TEST_ASSERT_EQUAL(LED3_OFF,state);   
+  resetCounter();
+}
 
 
