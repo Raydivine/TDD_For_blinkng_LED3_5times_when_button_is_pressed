@@ -5,11 +5,11 @@
 #include "defination.h"
 #include <stdio.h>
 
-
+static int counter = 0 ;
 
 void blinkLED3FiveTimesWhenButtonPressed(State *state, int time){
 	static int previousTime = 0 ;
-	static int counter = 0 ;
+
 
     switch (*state){
 			case  INITIAL:	turnOffLED3();
@@ -40,6 +40,7 @@ void blinkLED3FiveTimesWhenButtonPressed(State *state, int time){
                       }
 
                       if( counterIsEqualFive(counter)){
+                        printf("counter reached 5\n");
 			                	*state = INITIAL;
 			                	break;
 			                }
@@ -79,4 +80,8 @@ int counterIsEqualFive( int counter){
 	 if(counter>=5)
 	 	return 1;
 	 return 0;
+}
+
+void resetCounter(){
+  counter = 0;
 }
